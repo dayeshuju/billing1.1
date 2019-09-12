@@ -1,7 +1,8 @@
 /*引用theme.js*/
 $(document).ready(function () {
-    var lang = navigator.language||navigator.userLanguage;
-    lang = lang.substr(0, 2);
+    //var lang = navigator.language||navigator.userLanguage;
+    //lang = lang.substr(0, 2);
+    var lang = getCookie("Language");
     if("zh"==lang){
         findyhlx();
     }else{

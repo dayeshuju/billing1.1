@@ -1,7 +1,8 @@
 /*引用theme.js*/
 $(document).ready(function () {
-    var lang = navigator.language||navigator.userLanguage;
-    lang = lang.substr(0, 2);
+    //var lang = navigator.language||navigator.userLanguage;
+    //lang = lang.substr(0, 2);
+    var lang = getCookie("Language");
     if("zh"==lang){
         findjlsb();
     }else{
@@ -209,7 +210,12 @@ function addjlsb() {
         if (result.state == 1) {
             $('#modal-addjlsb').modal('hide');
             initform();
-            oTable.fnDraw(false);//重新加载当前页
+            var lang = getCookie("Language");
+            if("zh"==lang){
+                findjlsb();
+            }else{
+                findjlsbEs();
+            }
             layer.msg(result.message, {
                 icon: 1
             });
@@ -371,8 +377,9 @@ function finduserEs() {
 }
 
 function selectUser(){
-    var lan = navigator.language||navigator.userLanguage;
-    lan = lan.substr(0, 2);
+    //var lan = navigator.language||navigator.userLanguage;
+    //lan = lan.substr(0, 2);
+    var lan = getCookie("Language");
     if("zh"==lan){
         finduser();
     }else{

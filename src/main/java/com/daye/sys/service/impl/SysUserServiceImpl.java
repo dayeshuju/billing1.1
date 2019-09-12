@@ -2,6 +2,7 @@ package com.daye.sys.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.daye.common.annotation.RequiredLog;
+import com.daye.common.util.LangUtils;
 import com.daye.common.util.ShiroUtils;
 import com.daye.common.vo.JsonResult;
 import com.daye.sys.entity.SysUser;
@@ -34,7 +35,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Override
     @RequiredLog(value = 0, operation = "修改个人密码")
     public JsonResult updateObject(String oldpwd, String newpwd) {
-        String language=request.getHeader("Accept-Language").substring(0,2);
+        //String language=request.getHeader("Accept-Language").substring(0,2);
+        String language = LangUtils.getLang(request);
         SysUser user = sysUserMapper.selectById(ShiroUtils.getPrincipal().getId());
 
         SimpleHash oldM5pwd = new SimpleHash("MD5",oldpwd,user.getSalt());
@@ -115,7 +117,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Override
     @RequiredLog(operation = "添加系统用户")
     public JsonResult addUser(SysUser user) {
-        String language=request.getHeader("Accept-Language").substring(0,2);
+        //String language=request.getHeader("Accept-Language").substring(0,2);
+        String language = LangUtils.getLang(request);
         if("zh".equals(language)){
             if(StringUtils.isEmpty(user.getNickname().trim())) return new JsonResult(new Throwable("登录名不能为空"));
             if(StringUtils.isEmpty(user.getName().trim())) return new JsonResult(new Throwable("真实姓名不能为空"));
@@ -153,7 +156,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Override
     @RequiredLog(operation = "根据用户ID获取系统用户")
     public JsonResult getUser(Integer id) {
-        String language=request.getHeader("Accept-Language").substring(0,2);
+        //String language=request.getHeader("Accept-Language").substring(0,2);
+        String language = LangUtils.getLang(request);
         if(id == null || id== 0){
             if("zh".equals(language)) {
                 return new JsonResult(new Throwable("用户不存在"));
@@ -170,11 +174,12 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Override
     @RequiredLog(operation = "修改系统用户信息")
     public JsonResult updateUser(SysUser user) {
-        String language=request.getHeader("Accept-Language").substring(0,2);
+        //String language=request.getHeader("Accept-Language").substring(0,2);
+        String language = LangUtils.getLang(request);
         if("zh".equals(language)){
             if(StringUtils.isEmpty(user.getNickname().trim())) return new JsonResult(new Throwable("登录名不能为空"));
             if(StringUtils.isEmpty(user.getName().trim())) return new JsonResult(new Throwable("真实姓名不能为空"));
-            if(user.getRoleId()==null || user.getRoleId() == 0) return new JsonResult(new Throwable("权限类型不能为空"));
+            if((user.getRoleId()==null || user.getRoleId() == 0) && user.getId() != 1) return new JsonResult(new Throwable("权限类型不能为空"));
             SysUser oldUser = sysUserMapper.findUserByNickname(user.getNickname());
             if(oldUser != null && user.getId() != oldUser.getId()) return new JsonResult(new Throwable("修改后的用户名已存在"));
             user.setModifiedTime(new Date());
@@ -187,7 +192,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         }else{//西班牙语
             if(StringUtils.isEmpty(user.getNickname().trim())) return new JsonResult(new Throwable("No pueda estar vacío nombre de inicio de sesión"));
             if(StringUtils.isEmpty(user.getName().trim())) return new JsonResult(new Throwable("No pueda estar vacío nombre real"));
-            if(user.getRoleId()==null || user.getRoleId() == 0) return new JsonResult(new Throwable("No pueda estar vacío el tipo de permiso "));
+            if((user.getRoleId()==null || user.getRoleId() == 0) && user.getId() != 1) return new JsonResult(new Throwable("No pueda estar vacío el tipo de permiso "));
             SysUser oldUser = sysUserMapper.findUserByNickname(user.getNickname());
             if(oldUser != null && user.getId() != oldUser.getId()) return new JsonResult(new Throwable("El nombre de usuario modificado ya existe "));
             user.setModifiedTime(new Date());
@@ -214,7 +219,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @Override
     @RequiredLog(operation = "重置密码")
     public JsonResult resetPassword(Integer id) {
-        String language=request.getHeader("Accept-Language").substring(0,2);
+        //String language=request.getHeader("Accept-Language").substring(0,2);
+        String language = LangUtils.getLang(request);
         SysUser user = sysUserMapper.selectById(id);
         String salt = UUID.randomUUID().toString();
         String password = new SimpleHash("MD5","c92bf378km",salt).toHex();
@@ -238,7 +244,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     @RequiredLog(operation = "更改用户锁定状态")
     public JsonResult resetStatus(Integer id) {
         SysUser user = sysUserMapper.selectById(id);
-        String language=request.getHeader("Accept-Language").substring(0,2);
+        //String language=request.getHeader("Accept-Language").substring(0,2);
+        String language = LangUtils.getLang(request);
         if("zh".equals(language)){
             if(user.getRoleId() == 1) return new JsonResult(new Throwable("禁止锁定超级管理员"));
             Map<String,Object> map = new HashMap<>();

@@ -3,6 +3,7 @@ package com.daye.sys.controller;
 
 import com.daye.common.util.ExcelUtil;
 import com.daye.common.util.JsonToMap;
+import com.daye.common.util.LangUtils;
 import com.daye.common.vo.JsonResult;
 import com.daye.sys.entity.vt.VT_Jfjl;
 import com.daye.sys.service.TbJfjlService;
@@ -77,7 +78,8 @@ public class TbJfjlController {
         List<VT_Jfjl> jfjlList = tbJfjlService.exportJfjl(payStatus,meterId,idCode,startTime,endTime);
 
         List<String> titles = new ArrayList<>();
-        String language = request.getHeader("Accept-Language").substring(0,2);
+        //String language = request.getHeader("Accept-Language").substring(0,2);
+        String language = LangUtils.getLang(request);
         if("zh".equals(language)){
             titles.add("序号");
             titles.add("表号");

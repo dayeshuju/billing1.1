@@ -2,6 +2,7 @@ package com.daye.sys.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.daye.common.annotation.RequiredLog;
+import com.daye.common.util.LangUtils;
 import com.daye.common.vo.JsonResult;
 import com.daye.sys.entity.TbJfjl;
 import com.daye.sys.entity.vt.VT_Jfjl;
@@ -36,7 +37,8 @@ public class TbJfjlServiceImpl extends ServiceImpl<TbJfjlMapper, TbJfjl> impleme
     @Override
     @RequiredLog(operation = "获取最近一期缴费记录")
     public Map<String, Object> findObject(Map<String, String> aoData) {
-        String language = request.getHeader("Accept-Language").substring(0,2);
+        //String language = request.getHeader("Accept-Language").substring(0,2);
+        String language = LangUtils.getLang(request);
         VT_Jfjl vt_jfjl = new VT_Jfjl();
         //姓名
         if(!StringUtils.isEmpty(aoData.get("sSearch_1").trim())) vt_jfjl.setName(aoData.get("sSearch_1"));
@@ -154,7 +156,8 @@ public class TbJfjlServiceImpl extends ServiceImpl<TbJfjlMapper, TbJfjl> impleme
         Integer iDisplayLength = (Integer) iDisplayLengthsObj;
         Object sEchoStr = aoData.get("sEcho");
         Integer sEcho = (Integer) sEchoStr;
-        String language = request.getHeader("Accept-Language").substring(0,2);
+        //String language = request.getHeader("Accept-Language").substring(0,2);
+        String language = LangUtils.getLang(request);
 
         Integer count =tbJfjlMapper.findCountByid(meterId,startTime,endTime);
         List<VT_Jfjl> cbjlList = tbJfjlMapper.findObjectById(meterId,startTime,endTime,iDisplayStart,iDisplayLength);

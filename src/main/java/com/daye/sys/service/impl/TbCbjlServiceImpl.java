@@ -3,6 +3,7 @@ package com.daye.sys.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.daye.common.annotation.RequiredLog;
 import com.daye.common.util.FileUtils;
+import com.daye.common.util.LangUtils;
 import com.daye.common.vo.JsonResult;
 import com.daye.sys.entity.TbCbjl;
 import com.daye.sys.entity.vt.VT_Cbjl;
@@ -106,7 +107,8 @@ public class TbCbjlServiceImpl extends ServiceImpl<TbCbjlMapper, TbCbjl> impleme
         ApplicationHome home = new ApplicationHome(getClass());
         File jarF = home.getSource().getParentFile();
         String path = jarF.getParentFile().toString();
-        String language=request.getHeader("Accept-Language").substring(0,2);
+        //String language=request.getHeader("Accept-Language").substring(0,2);
+        String language = LangUtils.getLang(request);
         if (path == null || path.equals("")) {
             if("zh".equals(language)){
                 return new JsonResult(new Throwable("获取项目根目录错误"));

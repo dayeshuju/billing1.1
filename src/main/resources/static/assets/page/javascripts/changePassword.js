@@ -1,6 +1,7 @@
 function updatepwd() {
-    var lang = navigator.language||navigator.userLanguage;
-    lang = lang.substr(0, 2);
+    //var lang = navigator.language||navigator.userLanguage;
+    //lang = lang.substr(0, 2);
+    var lang = getCookie("Language");
     var oldpwd = document.getElementById("oldpwd").value;
     var newpwd = document.getElementById("newpwd").value;
     var newpwd2 = document.getElementById("newpwd2").value;
@@ -129,8 +130,9 @@ function verifysame(obj, newpwd, tipinput, tipinfo) {
 function saveverify(checkinput, alertinput) {
     var inputv = $("#" + checkinput).val();
     if (inputv.replace(/^ +| +$/g, '') == '') {
-        var lan = navigator.language||navigator.userLanguage;
-        lan = lan.substr(0, 2);
+        //var lan = navigator.language||navigator.userLanguage;
+        //lan = lan.substr(0, 2);
+        var lan = getCookie("Language");
         if("zh"==lan){
             document.getElementById(alertinput).value = "必填";
         }else{

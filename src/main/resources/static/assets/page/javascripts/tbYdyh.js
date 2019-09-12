@@ -1,7 +1,8 @@
 /*引用theme.js*/
 $(document).ready(function () {
-    var lang = navigator.language||navigator.userLanguage;
-    lang = lang.substr(0, 2);
+    //var lang = navigator.language||navigator.userLanguage;
+    //lang = lang.substr(0, 2);
+    var lang = getCookie("Language");
     getYhlxlist();
     if(lang == 'zh'){
         finduser();
@@ -231,8 +232,9 @@ function adduser() {
             }
         })
     }else{
-        var lang = navigator.language||navigator.userLanguage;
-        lang = lang.substr(0, 2);
+        //var lang = navigator.language||navigator.userLanguage;
+        //lang = lang.substr(0, 2);
+        var lang = getCookie("Language");
         if("zh"==lang){
             layer.msg("姓名不能包含数字！", {
                 icon: 2

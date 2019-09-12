@@ -58,8 +58,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
 <body class='contrast-red sign-in login'>
 <div id='wrapper'>
+    <div class="pull-right" style="margin-top: 20px;margin-right: 30px">
+        <a href="http://localhost:9001/doLoginUI?locale=zh_CN" style="color: white">中文</a>
+        <a href="http://localhost:9001/doLoginUI?locale=es" style="color:white;margin-left: 10px">Español</a>
+    </div>
     <div class='controls div1'>
-        <div class='form-wrapper'>
+    <div class='form-wrapper'>
             <h1 class='text-center' id='title' >[[#{title}]]</h1>
             <h6 class="text-center msg" style="visibility: hidden">1</h6>
             <form accept-charset="UTF-8" method="post" /><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
@@ -191,8 +195,9 @@
             increaseArea: '20%' // optional
         });
         $(".btn-login").click(doLogin);
-        lang = navigator.language||navigator.userLanguage;
-        lang = lang.substr(0, 2);//截取lang前2位字符
+        lang = getCookie("Language");
+        //lang = navigator.language||navigator.userLanguage;
+        //lang = lang.substr(0, 2);//截取lang前2位字符
 
     });
     $(document).keypress(function (event) {

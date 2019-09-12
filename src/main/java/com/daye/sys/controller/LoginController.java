@@ -1,6 +1,7 @@
 package com.daye.sys.controller;
 
 import com.daye.common.annotation.RequiredLog;
+import com.daye.common.util.LangUtils;
 import com.daye.common.vo.JsonResult;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -27,7 +28,8 @@ public class LoginController {
                         password);//凭证信息
         //2.2对用户信息进行身份认证
         subject.login(token);
-        String lang = request.getHeader("Accept-Language").substring(0,2);
+        //String lang = request.getHeader("Accept-Language").substring(0,2);
+        String lang = LangUtils.getLang(request);
         String json = "";
         if("zh".equals(lang)){
             json = "登录成功";

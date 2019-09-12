@@ -10,8 +10,9 @@ function checkCode(url){
 function checkUsername(thisobj){
 	var username = $(thisobj).val();
 	var reg = new RegExp(/^[-a-z_A-Z0-9\u4e00-\u9fa5]{3,20}$/);
-	var lang = navigator.language||navigator.userLanguage;
-	lang = lang.substr(0, 2);
+	//var lang = navigator.language||navigator.userLanguage;
+	//lang = lang.substr(0, 2);
+	var lang = getCookie("Language");
 	if("zh"==lang){
 		if(username.length()>2 && username.length()<21){
 			if (!reg.test(username)){
@@ -67,8 +68,9 @@ function checkPassword(thisobj) {
 	var password = $(thisobj).attr("value");
 	var reg = new RegExp(/^(?![^a-zA-Z]+$)(?!\D+$)/);
 	var flag = false;
-	var lang = navigator.language||navigator.userLanguage;
-	lang = lang.substr(0, 2);
+	//var lang = navigator.language||navigator.userLanguage;
+	//lang = lang.substr(0, 2);
+	var lang = getCookie("Language");
 	if("zh"==lang){
 		if(password.length>5 && password.length<21){
 			if (!reg.test(password)){
@@ -152,8 +154,9 @@ function checkEmail(thisobj){
 function sendcode(url){
 	var email = $("input[name='email']")[0];
 	if($(email).attr("value").length == 0){
-		var lang = navigator.language||navigator.userLanguage;
-		lang = lang.substr(0, 2);
+		//var lang = navigator.language||navigator.userLanguage;
+		//lang = lang.substr(0, 2);
+		var lang = getCookie("Language");
 		if("zh"==lang){
 			$("#err_msg4").html("请输入邮箱")
 		}else{

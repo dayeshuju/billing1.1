@@ -1,6 +1,7 @@
 package com.daye.sys.service.impl;
 
 import com.daye.common.annotation.RequiredLog;
+import com.daye.common.util.LangUtils;
 import com.daye.common.vo.JsonResult;
 import com.daye.sys.entity.TbJfjl;
 import com.daye.sys.entity.TbYdyh;
@@ -80,7 +81,8 @@ public class SytServiceImpl implements SytService {
     @RequiredLog(operation = "完成缴费")
     public JsonResult saveJfyh(Integer id, Double actualAmount, String note,Integer casher) {
         TbJfjl jfjl = tbJfjlMapper.selectById(id);
-        String language=request.getHeader("Accept-Language").substring(0,2);
+        //String language=request.getHeader("Accept-Language").substring(0,2);
+        String language = LangUtils.getLang(request);
         if("zh".equals(language)){
             if(actualAmount == null) return new JsonResult(new Throwable("请输入实缴电费"));
             if(Double.doubleToLongBits(jfjl.getAmountDue()) != Double.doubleToLongBits(actualAmount)) return new JsonResult(new Throwable("实缴电费与应缴电费金额不符"));

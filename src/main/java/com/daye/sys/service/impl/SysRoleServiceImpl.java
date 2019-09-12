@@ -2,6 +2,7 @@ package com.daye.sys.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.daye.common.annotation.RequiredLog;
+import com.daye.common.util.LangUtils;
 import com.daye.common.vo.JsonResult;
 import com.daye.sys.entity.SysRole;
 import com.daye.sys.mapper.SysRoleMapper;
@@ -72,7 +73,8 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     @RequiredLog(operation = "添加权限类型")
     //@Transactional
     public JsonResult addAuthority(SysRole sysRole, Integer[] menuIds) {
-        String lang = request.getHeader("Accept-Language").substring(0,2);
+        //String lang = request.getHeader("Accept-Language").substring(0,2);
+        String lang = LangUtils.getLang(request);
         if("zh".equals(lang)){
             if(StringUtils.isEmpty(sysRole.getName().trim())){
                 return new JsonResult(new Throwable("权限名称不能为空"));
@@ -127,7 +129,8 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     //@Transactional
     @RequiredLog(operation = "修改权限类型")
     public JsonResult updateObject(SysRole sysRole, Integer... menuIds) {
-        String lang = request.getHeader("Accept-Language").substring(0,2);
+        //String lang = request.getHeader("Accept-Language").substring(0,2);
+        String lang = LangUtils.getLang(request);
         String json = "";
         if("zh".equals(lang)){
             if(StringUtils.isEmpty(sysRole.getName().trim())) return new JsonResult(new Throwable("权限类型名称不能为空"));

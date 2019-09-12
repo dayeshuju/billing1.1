@@ -2,6 +2,7 @@ package com.daye.sys.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.daye.common.annotation.RequiredLog;
+import com.daye.common.util.LangUtils;
 import com.daye.common.vo.JsonResult;
 import com.daye.sys.entity.TbYhlx;
 import com.daye.sys.mapper.TbYhlxMapper;
@@ -63,7 +64,8 @@ public class TbYhlxServiceImpl extends ServiceImpl<TbYhlxMapper, TbYhlx> impleme
     @Override
     @RequiredLog(operation = "添加用户类型")
     public JsonResult addYhlx(TbYhlx yhlx) {
-        String language = request.getHeader("Accept-Language").substring(0,2);
+        //String language = request.getHeader("Accept-Language").substring(0,2);
+        String language = LangUtils.getLang(request);
         if("zh".equals(language)){
             if(StringUtils.isEmpty(yhlx.getUserType().trim())) return new JsonResult(new Throwable("用户类型不能为空"));
             if(yhlx.getTate()==null||Double.doubleToLongBits(Double.valueOf(yhlx.getTate()))==Double.doubleToLongBits(0)) return new JsonResult(new Throwable("电费费率不能为空或0"));
@@ -88,7 +90,8 @@ public class TbYhlxServiceImpl extends ServiceImpl<TbYhlxMapper, TbYhlx> impleme
     @Override
     @RequiredLog(operation = "根据用户类型ID获取系统用户类型")
     public JsonResult getYhlx(Long id) {
-        String language = request.getHeader("Accept-Language").substring(0,2);
+        //String language = request.getHeader("Accept-Language").substring(0,2);
+        String language = LangUtils.getLang(request);
         if("zh".equals(language)){
             if(id == null || id== 0L) return new JsonResult(new Throwable("用户不存在"));
         }else{
@@ -102,7 +105,8 @@ public class TbYhlxServiceImpl extends ServiceImpl<TbYhlxMapper, TbYhlx> impleme
     @Override
     @RequiredLog(operation = "修改用户类型信息")
     public JsonResult updateYhlx(TbYhlx yhlx) {
-        String language = request.getHeader("Accept-Language").substring(0,2);
+        //String language = request.getHeader("Accept-Language").substring(0,2);
+        String language = LangUtils.getLang(request);
         if("zh".equals(language)){
             if(StringUtils.isEmpty(yhlx.getUserType().trim())) return new JsonResult(new Throwable("用户类型不能为空"));
             if(yhlx.getTate()==null||Double.doubleToLongBits(Double.valueOf(yhlx.getTate()))==Double.doubleToLongBits(0)) return new JsonResult(new Throwable("电费费率不能为空或0"));

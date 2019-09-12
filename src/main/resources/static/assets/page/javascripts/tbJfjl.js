@@ -1,7 +1,8 @@
 /*引用theme.js*/
 $(document).ready(function () {
-    var lang = navigator.language||navigator.userLanguage;
-    lang = lang.substr(0, 2);
+    //var lang = navigator.language||navigator.userLanguage;
+    //lang = lang.substr(0, 2);
+    var lang = getCookie("Language");
     if("zh"==lang){
         findJfjl();
     }else{
@@ -134,8 +135,9 @@ function getHistoryJfjl() {
     initform(startTime,endTime);
     $(".delDiv").remove();
     var meterId = $("#meterId").val();
-    var lan = navigator.language||navigator.userLanguage;
-    lan = lan.substr(0, 2);
+    //var lan = navigator.language||navigator.userLanguage;
+    //lan = lan.substr(0, 2);
+    var lan = getCookie("Language");
     if(startTime == "" && endTime != ""){
         if("zh"==lan){
             layer.msg("请输入开始时间", {
@@ -453,8 +455,9 @@ function lookJfjlMsg(id) {
             $("#idCode").text(result.data.idCode);
             $("#meterNum").text(result.data.meterId);
             $("#payTime").text(result.data.payTime);
-            var la = navigator.language||navigator.userLanguage;
-            la = la.substr(0, 2);
+            //var la = navigator.language||navigator.userLanguage;
+            //la = la.substr(0, 2);
+            var la = getCookie("Language");
             if("zh"==la){
                 if (result.data.payStatu==0){$("#payStatus").text("未缴费");}
                 if (result.data.payStatu==1) {$("#payStatus").text("欠费");}
@@ -535,8 +538,9 @@ function clearExportConditions(){
 }
 
 function changeTimeType(){
-    var language = navigator.language||navigator.userLanguage;
-    language = language.substr(0, 2);
+    //var language = navigator.language||navigator.userLanguage;
+    //language = language.substr(0, 2);
+    var language = getCookie("Language");
     if("zh"==language){
         if($("#payStatus_export").val()=='2'){
             $(".timeTagStart").html("缴费起始时间：<font color=\"red\">*</font>");
@@ -635,8 +639,9 @@ function showDate(val){
 function exportJfjl(){
     var startTime = $("#starttime_export").val();
     var endTime = $("#endtime_export").val();
-    var languages = navigator.language||navigator.userLanguage;
-    languages = languages.substr(0, 2);
+    //var languages = navigator.language||navigator.userLanguage;
+    //languages = languages.substr(0, 2);
+    var languages = getCookie("Language");
     if(startTime==''||endTime==''){
         if("zh"==languages){
             layer.msg('时间为必填项，不能为空！', {

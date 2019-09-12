@@ -2,6 +2,7 @@ package com.daye.sys.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.daye.common.annotation.RequiredLog;
+import com.daye.common.util.LangUtils;
 import com.daye.common.vo.JsonResult;
 import com.daye.sys.entity.TbYdyh;
 import com.daye.sys.entity.TbYhlx;
@@ -81,7 +82,8 @@ public class TbYdyhServiceImpl extends ServiceImpl<TbYdyhMapper, TbYdyh> impleme
     @Override
     @RequiredLog(operation = "根据id修改用电用户")
     public JsonResult updateYdyh(TbYdyh ydyh) {
-        String language = request.getHeader("Accept-Language").substring(0,2);
+        //String language = request.getHeader("Accept-Language").substring(0,2);
+        String language = LangUtils.getLang(request);
         if("zh".equals(language)){
             if(StringUtils.isEmpty(ydyh.getName().trim())) return new JsonResult(new Throwable("请填写用户姓名"));
             if(StringUtils.isEmpty(ydyh.getIdCode().trim())) return new JsonResult(new Throwable("请填写用户身份证号"));
@@ -114,7 +116,8 @@ public class TbYdyhServiceImpl extends ServiceImpl<TbYdyhMapper, TbYdyh> impleme
     @Override
     @RequiredLog(operation = "添加用电用户")
     public JsonResult addYdyh(TbYdyh ydyh) {
-        String language = request.getHeader("Accept-Language").substring(0,2);
+        //String language = request.getHeader("Accept-Language").substring(0,2);
+        String language = LangUtils.getLang(request);
         if("zh".equals(language)){
             if(StringUtils.isEmpty(ydyh.getName().trim())) return new JsonResult(new Throwable("请填写用户姓名"));
             if(StringUtils.isEmpty(ydyh.getIdCode().trim())) return new JsonResult(new Throwable("请填写用户身份证号"));

@@ -1,6 +1,7 @@
 package com.daye.sys.controller;
 
 import com.daye.common.util.JsonToMap;
+import com.daye.common.util.LangUtils;
 import com.daye.common.util.ShiroUtils;
 import com.daye.common.vo.JsonResult;
 import com.daye.sys.service.SytService;
@@ -57,7 +58,8 @@ public class SytController {
     @RequestMapping("/printFactura")
     @RequiresPermissions("sys:tbsyt")
     public Object printFactura(Integer id, HttpServletResponse response){
-        String language = request.getHeader("Accept-Language").substring(0,2);
+        //String language = request.getHeader("Accept-Language").substring(0,2);
+        String language = LangUtils.getLang(request);
         Map<String,Object> datas = sytService.printFactura(id);
         ApplicationHome home = new ApplicationHome(getClass());
         File jarF = home.getSource();

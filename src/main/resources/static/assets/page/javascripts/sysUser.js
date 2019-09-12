@@ -1,7 +1,8 @@
 /*引用theme.js*/
 $(document).ready(function () {
-    var lang = navigator.language||navigator.userLanguage;
-    lang = lang.substr(0, 2);
+    //var lang = navigator.language||navigator.userLanguage;
+    //lang = lang.substr(0, 2);
+    var lang = getCookie("Language");
     getAuthoritylist();
     if("zh" == lang){
         finduser();
@@ -188,8 +189,9 @@ function lockuser() {
     }
     $.post(url, params, function (result) {
         if (result.state == 1) {
-            var lang = navigator.language||navigator.userLanguage;
-            lang = lang.substr(0, 2);
+            //var lang = navigator.language||navigator.userLanguage;
+            //lang = lang.substr(0, 2);
+            var lang = getCookie("Language");
             if("zh"==lang){
               if (result.data.valid == 1) {
                  $('#modal-unlockuser').modal('hide');
@@ -270,8 +272,9 @@ function lockuser() {
 
 /*添加、修改保存按钮onclick*/
 function adduser() {
-    var lang = navigator.language||navigator.userLanguage;
-    lang = lang.substr(0, 2);
+    //var lang = navigator.language||navigator.userLanguage;
+    //lang = lang.substr(0, 2);
+    var lang = getCookie("Language");
     var name = $("#name").val();
     var email = $("#email").val();
     var patt = /^(?=.*\d.*\b)/;
@@ -351,6 +354,7 @@ function initform() {
     $("#officePhone").val("");
     $("#email").val("");
     $("#roleId").val(0);
+    $("#roleId").attr("disabled",false);
 }
 
 /*修改用户弹出层*/

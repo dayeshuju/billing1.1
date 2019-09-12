@@ -1,7 +1,8 @@
 /*引用theme.js*/
 $(document).ready(function () {
-    var lang = navigator.language||navigator.userLanguage;
-    lang = lang.substr(0, 2);
+    //var lang = navigator.language||navigator.userLanguage;
+    //lang = lang.substr(0, 2);
+    var lang = getCookie("Language");
     if(lang == 'zh'){
         findCbjl();
     }else{
@@ -145,8 +146,9 @@ function getHistoryCbjl() {
                                 </table>`);
     $(".delDiv").remove();
     var meterId = $("#meterId").val();
-    var lang = navigator.language||navigator.userLanguage;
-    lang = lang.substr(0, 2);
+    //var lang = navigator.language||navigator.userLanguage;
+    //lang = lang.substr(0, 2);
+    var lang = getCookie("Language");
     if(startTime == "" && endTime != ""){
         if("zh"==lang){
             layer.msg("请输入开始时间", {
@@ -443,8 +445,9 @@ function upload(){
     var index = fileName.lastIndexOf(".");
     var suffix = fileName.substr(index+1);
     if(suffix != "csv"){
-        var lang = navigator.language||navigator.userLanguage;
-        lang = lang.substr(0, 2);
+        //var lang = navigator.language||navigator.userLanguage;
+        //lang = lang.substr(0, 2);
+        var lang = getCookie("Language");
         if("zh"==lang){
             layer.msg("您上传了错误的文件", {
                 icon: 2
@@ -488,3 +491,4 @@ function createUploadFileItem(){
     inputObj.value;
     inputObj.click();
 }
+

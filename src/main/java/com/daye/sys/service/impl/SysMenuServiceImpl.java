@@ -2,6 +2,7 @@ package com.daye.sys.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.daye.common.annotation.RequiredLog;
+import com.daye.common.util.LangUtils;
 import com.daye.common.vo.JsonResult;
 import com.daye.common.vo.Node;
 import com.daye.sys.entity.SysMenu;
@@ -55,7 +56,8 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     @Override
     @RequiredLog(operation = "获得菜单树")
     public JsonResult findZtreeMenuNodes() {
-        String lang = request.getHeader("Accept-Language").substring(0,2);
+        //String lang = request.getHeader("Accept-Language").substring(0,2);
+        String lang = LangUtils.getLang(request);
         List<Node> list = sysMenuMapper.findZtreeMenuNodes(lang);
         return new JsonResult(list);
     }

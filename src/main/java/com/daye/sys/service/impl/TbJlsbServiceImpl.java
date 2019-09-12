@@ -2,6 +2,7 @@ package com.daye.sys.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.daye.common.annotation.RequiredLog;
+import com.daye.common.util.LangUtils;
 import com.daye.common.vo.JsonResult;
 import com.daye.sys.entity.TbJlsb;
 import com.daye.sys.entity.TbYdyh;
@@ -38,7 +39,8 @@ public class TbJlsbServiceImpl extends ServiceImpl<TbJlsbMapper, TbJlsb> impleme
     @RequiredLog(operation = "根据计量设备ID获取计量设备")
     public JsonResult getJlsb(Long id) {
         if(id == null || id== 0L) {
-            String language = request.getHeader("Accept-Language").substring(0,2);
+            //String language = request.getHeader("Accept-Language").substring(0,2);
+            String language = LangUtils.getLang(request);
             if("zh".equals(language)){
                 return new JsonResult(new Throwable("用户不存在"));
             }else{
@@ -53,7 +55,8 @@ public class TbJlsbServiceImpl extends ServiceImpl<TbJlsbMapper, TbJlsb> impleme
     @RequiredLog(operation = "添加计量设备")
     public JsonResult addJlsb(VT_Jlsb jlsb) {
         TbJlsb jlsbInsert = new TbJlsb();
-        String language = request.getHeader("Accept-Language").substring(0,2);
+        //String language = request.getHeader("Accept-Language").substring(0,2);
+        String language = LangUtils.getLang(request);
         if("zh".equals(language)){
             if(StringUtils.isEmpty(jlsb.getMeterId().trim())) return new JsonResult(new Throwable("表号不能为空"));
             if(StringUtils.isEmpty(jlsb.getMeterBoxId().trim())) return new JsonResult(new Throwable("表箱号不能为空"));
@@ -87,7 +90,8 @@ public class TbJlsbServiceImpl extends ServiceImpl<TbJlsbMapper, TbJlsb> impleme
     @RequiredLog(operation = "修改计量设备信息")
     public JsonResult updateJlsb(VT_Jlsb jlsb) {
         TbJlsb jlsbInsert = new TbJlsb();
-        String language = request.getHeader("Accept-Language").substring(0,2);
+        //String language = request.getHeader("Accept-Language").substring(0,2);
+        String language = LangUtils.getLang(request);
         if("zh".equals(language)){
             if(StringUtils.isEmpty(jlsb.getMeterId().trim())) return new JsonResult(new Throwable("表号不能为空"));
             if(StringUtils.isEmpty(jlsb.getMeterBoxId().trim())) return new JsonResult(new Throwable("表箱号不能为空"));

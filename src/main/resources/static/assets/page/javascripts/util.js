@@ -188,8 +188,9 @@ function setFinishstate() {
         flag = 1;
     }
 
-    var lang = navigator.language||navigator.userLanguage;
-    lang = lang.substr(0, 2);
+    //var lang = navigator.language||navigator.userLanguage;
+    //lang = lang.substr(0, 2);
+    var lang = getCookie("Language");
     if("zh"==lang){
         if (flag == 1) {
             document.getElementById("finishstate").value = "正在推进";
@@ -210,8 +211,9 @@ function setFinishstate() {
 function setfinishdate() {
  
     var inputv = $("#finishstate").val();
-    var lang = navigator.language||navigator.userLanguage;
-    lang = lang.substr(0, 2);
+    //var lang = navigator.language||navigator.userLanguage;
+    //lang = lang.substr(0, 2);
+    var lang = getCookie("Language");
     if("zh"==lang){
         if (inputv == '未开始') {
             document.getElementById("finishdate").value = "";
@@ -244,8 +246,9 @@ function setlight(conferencedate, finishdate, finishstate) { //红 1   黄2   �
     var time1 = new Date(finishdate).getTime() - now.getTime(); //时间差的毫秒数    
 
     var inputv = $("#finishstate").val();
-    var lang = navigator.language||navigator.userLanguage;
-    lang = lang.substr(0, 2);
+    //var lang = navigator.language||navigator.userLanguage;
+    //lang = lang.substr(0, 2);
+    var lang = getCookie("Language");
     if("zh"==lang){
         if ((finishstate == '未开始') || (finishstate == '正在推进')) {
 

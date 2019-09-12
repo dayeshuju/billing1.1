@@ -1,7 +1,8 @@
 /*引用theme.js*/
 $(document).ready(function () {
-    var lan = navigator.language||navigator.userLanguage;
-    lan = lan.substr(0, 2);
+    //var lan = navigator.language||navigator.userLanguage;
+    //lan = lan.substr(0, 2);
+    var lan = getCookie("Language");
     if("zh"==lan){
         findSftj();
     }else{

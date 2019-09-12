@@ -1,7 +1,8 @@
 /*引用theme.js*/
 $(document).ready(function () {
-    var lang = navigator.language||navigator.userLanguage;
-    lang = lang.substr(0, 2);
+    //var lang = navigator.language||navigator.userLanguage;
+    //lang = lang.substr(0, 2);
+    var lang = getCookie("Language");
     if(lang == 'zh'){
         findJfjl();
     }else{
@@ -212,8 +213,9 @@ function saveJfjl() {
                 icon:2
             })
         }
-        var lang = navigator.language||navigator.userLanguage;
-        lang = lang.substr(0, 2);
+        //var lang = navigator.language||navigator.userLanguage;
+        //lang = lang.substr(0, 2);
+        var lang = getCookie("Language");
         if(lang == 'zh'){
             findJfjl();
         }else{
@@ -227,5 +229,6 @@ function print(sytId) {
     var newWindow = window.open("syt/printFactura?id="+sytId, "_blank");
     setTimeout(function () {
         newWindow.print();
+        oTable.fnDraw(false);
     },2000);
 }
